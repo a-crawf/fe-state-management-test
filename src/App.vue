@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <p>User: {{ user.firstName }} </p>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  computed: {
+    user() {
+      return this.$store.getters.getUser
+    }
+  },
+  created() {
+    this.$store.dispatch('fetchUser');
   }
 }
 </script>
