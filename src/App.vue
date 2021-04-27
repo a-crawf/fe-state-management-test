@@ -1,20 +1,29 @@
 <template>
   <div id="app">
-    <p>User: {{ user.firstName }} </p>
+    <p>Observable User: {{ observableUser.firstName }} </p>
+    <p>Vuex User: {{ vuexUser.firstName }} </p>
   </div>
 </template>
 
 <script>
+import { actions, getters, store } from './observable-store/index'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      store
+    }
+  },
   computed: {
-    user() {
+    observableUser: getters.getUser,
+    vuexUser() {
       return this.$store.getters.getUser
     }
   },
   created() {
     this.$store.dispatch('fetchUser');
+    actions.fetchUser();
   }
 }
 </script>
