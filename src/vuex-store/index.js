@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import getRandomInt from '../util/helpers'
 
 Vue.use(Vuex)
 
@@ -37,10 +38,10 @@ const mutations = {
 const fetchUser = ({ commit }) => {
   setTimeout(() => {
     commit('loadUser1')
-  }, 2000)
+  }, getRandomInt(500, 3000))
   setTimeout(() => {
     commit('loadUser2')
-  }, 4000)
+  }, getRandomInt(500, 3000))
 }
 
 const actions = {

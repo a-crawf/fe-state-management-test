@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import getRandomInt from '../util/helpers'
 
 const defaultState = {
     user: {
@@ -21,7 +22,7 @@ const fetchUser1 = () => {
         resolve( {
             firstName: 'Bob'
         })
-    }, 2000))
+    }, getRandomInt(500, 3000)))
 }
 
 const fetchUser2 = () => {
@@ -29,12 +30,18 @@ const fetchUser2 = () => {
         resolve( {
             firstName: 'Phil'
         })
-    }, 2000))
+    }, getRandomInt(500, 3000)))
 }
 
-const fetchUser = async () => {
-    store.user = await fetchUser1();
-    store.user = await fetchUser2();
+const fetchUser = () => {
+    fetchUser1()
+        .then(user => {
+            store.user = user;
+        });
+    fetchUser2()
+        .then(user => {
+            store.user = user;
+        });
 }
 
 export const actions = {
